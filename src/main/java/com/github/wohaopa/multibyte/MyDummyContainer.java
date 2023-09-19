@@ -1,15 +1,16 @@
 package com.github.wohaopa.multibyte;
 
+import java.util.Arrays;
+
 import com.google.common.eventbus.EventBus;
+
 import cpw.mods.fml.common.DummyModContainer;
 import cpw.mods.fml.common.LoadController;
 import cpw.mods.fml.common.ModMetadata;
 
-import java.util.Arrays;
-
 public class MyDummyContainer extends DummyModContainer {
-    public MyDummyContainer()
-    {
+
+    public MyDummyContainer() {
         super(new ModMetadata());
         ModMetadata meta = getMetadata();
         meta.modId = "multibyte";
@@ -21,11 +22,10 @@ public class MyDummyContainer extends DummyModContainer {
         meta.url = "https://github.com/wohaopa/multibyte";
         meta.updateUrl = "https://github.com/wohaopa/multibyte/releases";
     }
+
     @Override
-    public boolean registerBus(EventBus bus, LoadController controller)
-    {
+    public boolean registerBus(EventBus bus, LoadController controller) {
         return true;
     }
-
 
 }
