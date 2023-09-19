@@ -13,7 +13,7 @@ public class MyFMLPlugin implements IFMLLoadingPlugin {
 
     @Override
     public String getModContainerClass() {
-        return null;
+        return "com.github.wohaopa.multibyte.MyDummyContainer";
     }
 
     @Override
