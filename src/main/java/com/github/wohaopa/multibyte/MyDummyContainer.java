@@ -15,7 +15,7 @@ public class MyDummyContainer extends DummyModContainer {
         ModMetadata meta = getMetadata();
         meta.modId = "multibyte";
         meta.name = "multibyte";
-        meta.version = "1.1";
+        meta.version = "1.3";
         meta.authorList = Arrays.asList("wohaopa");
         meta.description = "Extend the unicode set supported by Minecraft to support double Char unicode codes.";
         meta.credits = "";
