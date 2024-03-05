@@ -252,20 +252,6 @@ public class MyTransformer implements IClassTransformer {
         private boolean first = true;
 
         @Override
-        protected void onMethodEnter() {
-            super.onMethodEnter();
-
-        }
-
-        // @Override
-        // protected void updateNewLocals(Object[] newLocals) {
-        // if(newLocals.length > char1){
-        // newLocals[char1] = INTEGER;
-        // }
-        // super.updateNewLocals(newLocals);
-        // }
-
-        @Override
         public void visitMethodInsn(int opcode, String owner, String name, String desc, boolean itf) {
 
             if (Opcodes.INVOKESPECIAL == opcode && "net/minecraft/client/gui/FontRenderer".equals(owner)
