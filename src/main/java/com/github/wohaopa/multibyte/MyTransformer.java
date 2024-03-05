@@ -12,6 +12,9 @@ import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 import org.objectweb.asm.commons.AdviceAdapter;
 
+import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
+
+@IFMLLoadingPlugin.SortingIndex(9999)
 public class MyTransformer implements IClassTransformer {
 
     static boolean deobfuscatedEnvironment;
@@ -285,7 +288,7 @@ public class MyTransformer implements IClassTransformer {
         @Override
         public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
             MethodVisitor methodVisitor = super.visitMethod(access, name, desc, signature, exceptions);
-            if (name.equals("renderStringAtPos") || name.equals("func_78255_a")) {
+            if (name.equals("renderStringAtPos") || name.equals("func_78255_a") || name.equals("a")) {
                 return new MyAdapter1(Opcodes.ASM5, methodVisitor, access, name, desc);
             } else if (name.equals("<clinit>")) {
                 return new MyAdapter2(Opcodes.ASM5, methodVisitor, access, name, desc);
@@ -339,7 +342,7 @@ public class MyTransformer implements IClassTransformer {
         public void visitMethodInsn(int opcode, String owner, String name, String desc, boolean itf) {
 
             if (Opcodes.INVOKESPECIAL == opcode && "net/minecraft/client/gui/FontRenderer".equals(owner)
-                && ("renderCharAtPos".equals(name) || name.equals("func_78278_a"))
+                && ("renderCharAtPos".equals(name) || "func_78278_a".equals(name) || "a".equals(name))
                 && "(ICZ)F".equals(desc)) {
 
                 int var3 = super.newLocal(Type.BOOLEAN_TYPE);
