@@ -14,10 +14,11 @@ def text_to_pixels(index, font_size=12):
             x = 16 * i
             y = 16 * j
             id = index*16*16 + i*16 + j
-            draw.text((y, x), chr(id), font=font, fill="black")
+            draw.text((y, x), chr(id), font=font, fill="white")
 
     image.save("src/main/resources/assets/minecraft/textures/font/unicode_page_" + hex(index)[2:] + ".png")
 
-
-for i in range(0x200, 0x2a7):
+print("0x200 to 0x2eb")
+for i in range(0x200, 0x2eb):
+    print(hex(index))
     text_to_pixels(i, font_size=16)
