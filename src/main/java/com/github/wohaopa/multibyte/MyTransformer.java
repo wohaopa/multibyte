@@ -12,6 +12,7 @@ import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 import org.objectweb.asm.commons.AdviceAdapter;
 
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
 
 @IFMLLoadingPlugin.SortingIndex(9999)
@@ -77,9 +78,13 @@ public class MyTransformer implements IClassTransformer {
         @Override
         public void visitEnd() {
             super.visitEnd();
+            FMLLog.info("MB: Injection method: renderMultibyteCharAtPos(CC)F");
+            String Name_loadGlyphTexture = deobfuscatedEnvironment ? "loadGlyphTexture" : "func_78257_a";
+            String Name_italicStyle = deobfuscatedEnvironment ? "italicStyle" : "field_78301_u";
+            String Name_posX = deobfuscatedEnvironment ? "posX" : "field_78295_j";
+            String Name_posY = deobfuscatedEnvironment ? "posY" : "field_78296_k";
             MethodVisitor mv = visitMethod(Opcodes.ACC_PRIVATE, "renderMultibyteCharAtPos", "(CC)F", null, null);
             {
-
                 mv.visitCode();
                 mv.visitVarInsn(Opcodes.ILOAD, 1);
                 mv.visitIntInsn(Opcodes.SIPUSH, 1023);
@@ -102,7 +107,7 @@ public class MyTransformer implements IClassTransformer {
                 mv.visitMethodInsn(
                     Opcodes.INVOKESPECIAL,
                     "net/minecraft/client/gui/FontRenderer",
-                    deobfuscatedEnvironment ? "loadGlyphTexture" : "func_78257_a",
+                    Name_loadGlyphTexture,
                     "(I)V",
                     false);
                 mv.visitInsn(Opcodes.ICONST_0);
@@ -142,11 +147,7 @@ public class MyTransformer implements IClassTransformer {
                 mv.visitInsn(Opcodes.FSUB);
                 mv.visitVarInsn(Opcodes.FSTORE, 11);
                 mv.visitVarInsn(Opcodes.ALOAD, 0);
-                mv.visitFieldInsn(
-                    Opcodes.GETFIELD,
-                    "net/minecraft/client/gui/FontRenderer",
-                    deobfuscatedEnvironment ? "italicStyle" : "field_78301_u",
-                    "Z");
+                mv.visitFieldInsn(Opcodes.GETFIELD, "net/minecraft/client/gui/FontRenderer", Name_italicStyle, "Z");
                 Label l0 = new Label();
                 mv.visitJumpInsn(Opcodes.IFEQ, l0);
                 mv.visitInsn(Opcodes.FCONST_1);
@@ -166,19 +167,11 @@ public class MyTransformer implements IClassTransformer {
                 mv.visitInsn(Opcodes.FDIV);
                 mv.visitMethodInsn(Opcodes.INVOKESTATIC, "org/lwjgl/opengl/GL11", "glTexCoord2f", "(FF)V", false);
                 mv.visitVarInsn(Opcodes.ALOAD, 0);
-                mv.visitFieldInsn(
-                    Opcodes.GETFIELD,
-                    "net/minecraft/client/gui/FontRenderer",
-                    deobfuscatedEnvironment ? "posX" : "field_78295_j",
-                    "F");
+                mv.visitFieldInsn(Opcodes.GETFIELD, "net/minecraft/client/gui/FontRenderer", Name_posX, "F");
                 mv.visitVarInsn(Opcodes.FLOAD, 12);
                 mv.visitInsn(Opcodes.FADD);
                 mv.visitVarInsn(Opcodes.ALOAD, 0);
-                mv.visitFieldInsn(
-                    Opcodes.GETFIELD,
-                    "net/minecraft/client/gui/FontRenderer",
-                    deobfuscatedEnvironment ? "posY" : "field_78296_k",
-                    "F");
+                mv.visitFieldInsn(Opcodes.GETFIELD, "net/minecraft/client/gui/FontRenderer", Name_posY, "F");
                 mv.visitInsn(Opcodes.FCONST_0);
                 mv.visitMethodInsn(Opcodes.INVOKESTATIC, "org/lwjgl/opengl/GL11", "glVertex3f", "(FFF)V", false);
                 mv.visitVarInsn(Opcodes.FLOAD, 9);
@@ -191,19 +184,11 @@ public class MyTransformer implements IClassTransformer {
                 mv.visitInsn(Opcodes.FDIV);
                 mv.visitMethodInsn(Opcodes.INVOKESTATIC, "org/lwjgl/opengl/GL11", "glTexCoord2f", "(FF)V", false);
                 mv.visitVarInsn(Opcodes.ALOAD, 0);
-                mv.visitFieldInsn(
-                    Opcodes.GETFIELD,
-                    "net/minecraft/client/gui/FontRenderer",
-                    deobfuscatedEnvironment ? "posX" : "field_78295_j",
-                    "F");
+                mv.visitFieldInsn(Opcodes.GETFIELD, "net/minecraft/client/gui/FontRenderer", Name_posX, "F");
                 mv.visitVarInsn(Opcodes.FLOAD, 12);
                 mv.visitInsn(Opcodes.FSUB);
                 mv.visitVarInsn(Opcodes.ALOAD, 0);
-                mv.visitFieldInsn(
-                    Opcodes.GETFIELD,
-                    "net/minecraft/client/gui/FontRenderer",
-                    deobfuscatedEnvironment ? "posY" : "field_78296_k",
-                    "F");
+                mv.visitFieldInsn(Opcodes.GETFIELD, "net/minecraft/client/gui/FontRenderer", Name_posY, "F");
                 mv.visitLdcInsn(7.99f);
                 mv.visitInsn(Opcodes.FADD);
                 mv.visitInsn(Opcodes.FCONST_0);
@@ -218,11 +203,7 @@ public class MyTransformer implements IClassTransformer {
                 mv.visitInsn(Opcodes.FDIV);
                 mv.visitMethodInsn(Opcodes.INVOKESTATIC, "org/lwjgl/opengl/GL11", "glTexCoord2f", "(FF)V", false);
                 mv.visitVarInsn(Opcodes.ALOAD, 0);
-                mv.visitFieldInsn(
-                    Opcodes.GETFIELD,
-                    "net/minecraft/client/gui/FontRenderer",
-                    deobfuscatedEnvironment ? "posX" : "field_78295_j",
-                    "F");
+                mv.visitFieldInsn(Opcodes.GETFIELD, "net/minecraft/client/gui/FontRenderer", Name_posX, "F");
                 mv.visitVarInsn(Opcodes.FLOAD, 11);
                 mv.visitInsn(Opcodes.FCONST_2);
                 mv.visitInsn(Opcodes.FDIV);
@@ -230,11 +211,7 @@ public class MyTransformer implements IClassTransformer {
                 mv.visitVarInsn(Opcodes.FLOAD, 12);
                 mv.visitInsn(Opcodes.FADD);
                 mv.visitVarInsn(Opcodes.ALOAD, 0);
-                mv.visitFieldInsn(
-                    Opcodes.GETFIELD,
-                    "net/minecraft/client/gui/FontRenderer",
-                    deobfuscatedEnvironment ? "posY" : "field_78296_k",
-                    "F");
+                mv.visitFieldInsn(Opcodes.GETFIELD, "net/minecraft/client/gui/FontRenderer", Name_posY, "F");
                 mv.visitInsn(Opcodes.FCONST_0);
                 mv.visitMethodInsn(Opcodes.INVOKESTATIC, "org/lwjgl/opengl/GL11", "glVertex3f", "(FFF)V", false);
                 mv.visitVarInsn(Opcodes.FLOAD, 9);
@@ -249,11 +226,7 @@ public class MyTransformer implements IClassTransformer {
                 mv.visitInsn(Opcodes.FDIV);
                 mv.visitMethodInsn(Opcodes.INVOKESTATIC, "org/lwjgl/opengl/GL11", "glTexCoord2f", "(FF)V", false);
                 mv.visitVarInsn(Opcodes.ALOAD, 0);
-                mv.visitFieldInsn(
-                    Opcodes.GETFIELD,
-                    "net/minecraft/client/gui/FontRenderer",
-                    deobfuscatedEnvironment ? "posX" : "field_78295_j",
-                    "F");
+                mv.visitFieldInsn(Opcodes.GETFIELD, "net/minecraft/client/gui/FontRenderer", Name_posX, "F");
                 mv.visitVarInsn(Opcodes.FLOAD, 11);
                 mv.visitInsn(Opcodes.FCONST_2);
                 mv.visitInsn(Opcodes.FDIV);
@@ -261,11 +234,7 @@ public class MyTransformer implements IClassTransformer {
                 mv.visitVarInsn(Opcodes.FLOAD, 12);
                 mv.visitInsn(Opcodes.FSUB);
                 mv.visitVarInsn(Opcodes.ALOAD, 0);
-                mv.visitFieldInsn(
-                    Opcodes.GETFIELD,
-                    "net/minecraft/client/gui/FontRenderer",
-                    deobfuscatedEnvironment ? "posY" : "field_78296_k",
-                    "F");
+                mv.visitFieldInsn(Opcodes.GETFIELD, "net/minecraft/client/gui/FontRenderer", Name_posY, "F");
                 mv.visitLdcInsn(7.99f);
                 mv.visitInsn(Opcodes.FADD);
                 mv.visitInsn(Opcodes.FCONST_0);
@@ -288,7 +257,8 @@ public class MyTransformer implements IClassTransformer {
         @Override
         public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
             MethodVisitor methodVisitor = super.visitMethod(access, name, desc, signature, exceptions);
-            if (name.equals("renderStringAtPos") || name.equals("func_78255_a") || name.equals("a")) {
+            if ((name.equals("renderStringAtPos") || name.equals("func_78255_a") || name.equals("a"))
+                && desc.equals("(Ljava/lang/String;Z)V")) {
                 return new MyAdapter1(Opcodes.ASM5, methodVisitor, access, name, desc);
             } else if (name.equals("<clinit>")) {
                 return new MyAdapter2(Opcodes.ASM5, methodVisitor, access, name, desc);
@@ -322,11 +292,33 @@ public class MyTransformer implements IClassTransformer {
     }
 
     /**
-     * The Adapter simply increases the size of the unicodePageLocations(field_111274_c) field by a factor of 16 to hold
-     * additional fonts.
+     * The Adapter will just inject a piece of code into the renderStringAtPos(func_78255_a) method when
+     * renderCharAtPos(func_78278_a) is called. Because injecting logic involves the modification of local variables
+     * based on custom conditions, this is difficult and inefficient using mixins.
      * It looks something like this:
-     * private static final ResourceLocation[] field_111274_c = new ResourceLocation[256];
-     * private static final ResourceLocation[] field_111274_c = new ResourceLocation[4096];
+     * The First:
+     * ====before====:
+     * float f = this.func_78278_a(j, c0, this.field_78301_u); // renderCharAtPos, italicStyle
+     * ====after====:
+     * boolean var9 = this.field_78301_u;
+     * boolean var10 = i + 1 < p_78255_1_.length() && Character.isSurrogatePair(c0, p_78255_1_.charAt(i + 1));
+     * float var10000;
+     * if (var10) {
+     * ++i;
+     * var10000 = this.renderMultibyteCharAtPos(c0, p_78255_1_.charAt(i));
+     * } else {
+     * var10000 = this.func_78278_a(j, c0, var9);
+     * }
+     * float f = var10000;
+     * The Rest:
+     * ====before====:
+     * this.func_78278_a(j, c0, this.field_78301_u); // renderCharAtPos, italicStyle
+     * ====after====:
+     * if (var10) {
+     * this.renderMultibyteCharAtPos(c0, p_78255_1_.charAt(i));
+     * } else {
+     * this.func_78278_a(j, c0, var13);
+     * }
      */
     static class MyAdapter1 extends AdviceAdapter {
 
@@ -340,11 +332,11 @@ public class MyTransformer implements IClassTransformer {
 
         @Override
         public void visitMethodInsn(int opcode, String owner, String name, String desc, boolean itf) {
-
-            if (Opcodes.INVOKESPECIAL == opcode && "net/minecraft/client/gui/FontRenderer".equals(owner)
+            if (Opcodes.INVOKESPECIAL == opcode
+                && ("net/minecraft/client/gui/FontRenderer".equals(owner) || "bbu".equals(owner))
                 && ("renderCharAtPos".equals(name) || "func_78278_a".equals(name) || "a".equals(name))
                 && "(ICZ)F".equals(desc)) {
-
+                FMLLog.info("MB: Found method %s.%s%s (renderCharAtPos)", owner, name, desc);
                 int var3 = super.newLocal(Type.BOOLEAN_TYPE);
                 super.visitVarInsn(Opcodes.ISTORE, var3);
                 super.pop();
